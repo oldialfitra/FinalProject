@@ -1,0 +1,6 @@
+1. Create database:
+	User
+	File
+	ShareFile
+2. Upload file => multer, limit download, search file lain based on @username
+
