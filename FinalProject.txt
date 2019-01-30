@@ -3,4 +3,20 @@
 	File
 	ShareFile
 2. Upload file => multer, limit download, search file lain based on @username
+3. Fungsi:
+	1) Create: Upload File based based on id
+		if(data.id === User.id) {
+			have option (update, delete, download)
+		}
+		else {
+			have option (download)
+		}
+	2) Search based on other username
+	3) In Table ShareFile have limit
+		if(limit <= 5) {
+			downloaded file
+		}
+		else {
+			can't download file
+		}
 
