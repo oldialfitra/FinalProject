@@ -26,6 +26,14 @@ app.get('/users/register', (req,res) => {
 app.get('/users/login', (req,res) => {
     res.render('login')
 })
+
+app.get('/users/download',(req,res) => {
+    res.render('download')
+})
+
+app.get('/users/myshare', (req,res) => {
+    res.render('myshare')
+})
 // app.use('/user/register', userRouter)
 
 app.listen(port, function() {

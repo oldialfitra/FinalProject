@@ -1,0 +1,42 @@
+body {
+    background: url(bg.jpg);
+}
+
+ul li img {
+    width: 200px;
+    height: 190px;
+}
+
+ul li.logo {
+    position: relative;
+    float: left;
+    bottom: 50px;
+}
+
+ul li form.search {
+    padding-top: 20px;
+    padding-left: 290px;
+}
+
+ul li form.upload {
+    margin-top: 100px;
+    margin-left: 220px;
+    /* margin: 0 auto; */
+    padding: 20px;
+    border: double 8px black;
+}
+
+ul li.username {
+    float: right;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+table tr td a {
+    color: red;
+}
