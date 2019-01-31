@@ -14,8 +14,7 @@ let port = 3000
 //EJS
 app.set('trust proxy', 1) // trust first proxy
 var sess = {
-    secret: 'keyboard cat',
-    cookie: {}
+    secret: 'keyboard cat'
 }
 app.use(session(sess))
 app.set('view engine', 'ejs')
@@ -26,6 +25,7 @@ app.use(express.static('./public'))
 app.get("/", (req, res) => {
     res.redirect('index')
 })
+app.use('/user', userRouter)
 
 app.get('/getSession', (req, res) => {
     res.send(req.session)
@@ -41,7 +41,7 @@ app.get('/logout', (req, res) => {
     res.send('logout')
 })
 
-app.use('/user', userRouter)
+
 
 
 

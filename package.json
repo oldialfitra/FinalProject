@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/oldialfitra/FinalProject#readme",
   "dependencies": {
+    "bcrypt": "^3.0.3",
     "bcryptjs": "^2.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",

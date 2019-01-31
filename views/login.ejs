@@ -36,11 +36,13 @@
 </head>
 
 <body style="text-align:center;">
-    <form action="/<%=output.id%>/update" method="POST">
-        <p> Update File</p>
-        <label for="name"> Name </label> <br>
-        <input id = "name" type="text" name="name" value='<%=output.name.split(".")[0]%>'><br>
-        <button id= "save" type="submit">Masukkan</button>
+    <form action="/user/login" method="POST">
+        <p> Register User</p>
+        <label for="username"> Name </label> <br>
+        <input id = "username" type="text" name="username"><br>
+        <label for="password"> Username </label> <br> 
+        <input id = "password" type="text" name="password"><br>
+        <button type="submit">Masukkan</button>
     </form>
 </body>
 
