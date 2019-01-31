@@ -16,7 +16,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('./public'))
 
 app.get("/", (req, res) => {
-    res.send("Tugas Weekend Express Sequelize Crud.")
+    res.redirect('index')
 })
 
 app.use('/user', userRouter)
