@@ -1,0 +1,26 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oldialfitra/FinalProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oldialfitra/FinalProject/issues"
+  },
+  "homepage": "https://github.com/oldialfitra/FinalProject#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "multer": "^1.4.1",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0"
+  }
+}

@@ -1,0 +1,80 @@
+Newton Second Law
+
+Algoritma
+
+1. Simpan "Massa benda" dengan nilai 600.
+2. Simpan "Percepatan benda" dengan nilai 2.
+3. Simpan "Resultan gaya" tanpa diberikan nilai. Ini akan kita isi nanti.
+4. Hitung hasil perkalian "Massa benda" dengan Percepatan benda".
+5. Setelah mendapatkan hasil perhitungan, isikan hasilnya ke dalam "Resultan gaya".
+6. Tampilkan nilai dari "Resultan gaya".
+
+Pseudocode
+
+STORE "Massa benda" with 600
+STORE "Percepatan benda" with 2
+STORE "Resultan gaya" without any value
+
+CALCULATE "Massa benda" times "Percepatan benda"
+SET "Resultan gaya" value with calculation result
+
+DISPLAY "Resultan gaya"
+
+Tahun Kabisat
+
+Algoritma
+
+1. Simpan "Tahun" dengan nilai berapapun.
+2. Jika "Tahun" habis dibagi 4 DAN "Tahun" tidak habis dibagi 100, Tampilkan "Tahun Kabisat". Jika tidak, masuk ke tahap 3.
+3. Jika "Tahun" habis dibagi 4 DAN "Tahun" habis dibagi 100 DAN "Tahun" habis dibagi 400, Tampilkan "Tahun Kabisat". Jika tidak, masuk ke tahap 4.
+Tampilkan "Bukan Tahun Kabisat".
+
+Pseudocode
+
+STORE "Tahun" with any value
+IF ("Tahun" mod 4 equals to 0) AND ("TAhun" mod 100 not equals to 0)
+	DISPLAY "Tahun Kabisat"
+ELSE IF ("Tahun" mod 4 equals to 0) AND ("Tahun" mod 100 equals to 0) AND ("Tahun" mod 400 equals to 0)
+	DISPLAY "Tahun Kabisat"
+ELSE
+	DISPLAY "Bukan Tahun Kabisat"
+
+Laundry Day
+
+Algoritma
+
+1. Simpan "Baju" dengan nilai 0.
+2. Ulangi tahap 4 selama "Baju" masih dibawah atau sama dengan 20. Jika "Baju" sudah 20, lanjut ke tahap 5.
+3. Tampilkan "Baju"
+4. Tambah "Baju" dengan 1, agar semakin mendekati batas perulangan. Kembali ke tahap 2.
+5. Lakukan "Nyalakan mesin cuci".
+
+Pseudocode
+
+STORE "Baju" with 0
+WHILE "BAJU" <= 20
+	DISPLAY "Baju"
+	CALCULATE "Baju" plus 1
+
+DO "Nyalakan mesin cuci"
+
+
+Periksa Kuku
+	
+Algoritma
+
+1. Simpan "Siswa" dengan nilai 0.
+2. Simpan daftar "Absen" dengan nilai 0.
+2. Ulangi tahap 3 selama "Siswa" masih dibawah atau sama dengan 40. Jika "Siswa" sudah 40, lanjut ke tahap 5.
+
+Pseudocode
+
+STORE "Siswa" with 0
+
+
+WHILE "Siswa" <= 40
+	CALCULATE "Siswa" plus 1
+	IF "" equals to "Kuku panjang"
+		DO "Hukum siswa tersebut"
+	ELSE
+		DO "Puji siswa tersebut"
