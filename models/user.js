@@ -1,12 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {});
-  User.associate = function(models) {
-    // associations can be defined here
-  };
-  return User;
+    const bcrypt = require('bcryptjs')
+    const User = sequelize.define('User', {
+        name: DataTypes.STRING,
+        username: DataTypes.STRING,
+        password: DataTypes.STRING,
+        email: DataTypes.STRING
+    }, {
+        hooks: {
+            beforeCreate: (user, options) => {
+                user.password = bcrypt.hashSync(user.password, 8);
+            }
+        }
+    });
+    User.associate = function(models) {
+        // associations can be defined here
+        User.belongsToMany(models.File, { through: 'ShareFile', foreignKey: 'UserId', otherKey: 'FileId' })
+    };
+    return User;
 };
