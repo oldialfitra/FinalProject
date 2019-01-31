@@ -4,11 +4,53 @@ const file = require('../models').File
 const sharefile = require('../models').ShareFile
 const storage = require('../helper/storage')
 const upload = require('../helper/upload')
+const encrypt = require('../helper/encrypt')
 
-router.get('/:id/list', (req, res) => {
+// router.get('/login', (req, res) => {
+
+// })
+router.get('/login', (req, res) => {
+    res.render('login')
+})
+
+router.post('/login', (req, res) => {
+    user.findOne({
+            where: {
+                username: req.body.username,
+            }
+        })
+        .then(function(data) {
+            if (data === null) {
+                res.send('Wrong username')
+            } else {
+                if (encrypt(req.body.password, data.password)) {
+                    req.session.user = { id: data.id }
+                    res.redirect('/user/list')
+                        // req.session.user
+                } else {
+                    throw 'wrong password'
+                }
+            }
+            // }
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
+})
+
+router.get('/getSession', (req, res) => {
+    res.send(req.session.user.id)
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.send('logout')
+})
+
+router.get('/list', (req, res) => {
     sharefile.findAll({
             where: {
-                UserId: req.params.id
+                UserId: req.session.user.id
             },
             include: {
                 model: file
@@ -23,8 +65,8 @@ router.get('/:id/list', (req, res) => {
         })
 })
 
-router.get('/:id/upload', (req, res) => {
-    user.findByPk(req.params.id)
+router.get('/upload', (req, res) => {
+    user.findByPk(req.session.user.id)
         .then(function(data) {
             // res.send(data)
             res.render('index', { output: data })
@@ -35,7 +77,7 @@ router.get('/:id/upload', (req, res) => {
 
 })
 
-router.post('/:id/upload', (req, res) => {
+router.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
             res.render('index', {
@@ -51,7 +93,7 @@ router.post('/:id/upload', (req, res) => {
                 })
                 .then(function(data) {
                     sharefile.create({
-                        UserId: req.params.id,
+                        UserId: req.session.user.id,
                         FileId: data.id,
                         limit: 0,
                         createdAt: new Date(),
@@ -60,7 +102,7 @@ router.post('/:id/upload', (req, res) => {
                 })
             console.log(req.file)
                 // res.send('test')
-            res.redirect('/user')
+            res.render('list')
         }
     })
 })
@@ -94,7 +136,7 @@ router.get('/:id/update', (req, res) => {
     file.findByPk(req.params.id)
         .then(function(data) {
             // res.send(data)
-            res.render('update', { output: data, filename: data.name.split('.')[0] })
+            res.render('update', { output: data })
         })
         .catch(function(err) {
             res.send(err)
@@ -114,7 +156,7 @@ router.post('/:id/update', (req, res) => {
         })
 
     .then(function() {
-            res.send('update berhasil')
+            res.redirect('/list')
         })
         .catch(function(err) {
             res.send(err)
@@ -135,12 +177,57 @@ router.get('/:id/delete', (req, res) => {
             })
         })
         .then(function(data) {
-            res.send('Destroy berhasil')
+            res.redirect('/list')
+        })
+        .catch(function(err) {
+            res.send(err)
         })
 })
 
 router.get('/:id/download', (req, res) => {
+    file.findByPk(req.params.id)
+        .then(function(data) {
+            res.download(data.path)
+        })
+})
 
+router.get('/:username/search', (req, res) => {
+    user.findOne({
+            where: {
+                username: req.params.username
+            }
+        })
+        .then(function(data) {
+            res.render(data)
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
+})
+
+router.get('/:username/list', (req, res) => {
+    user.findOne({
+            where: {
+                username: req.params.username
+            }
+        })
+        .then(function(data) {
+            sharefile.findAll({
+                where: {
+                    UserId: data.id
+                },
+                include: {
+                    model: file
+                }
+            })
+        })
+        .then(function(data) {
+            // res.send(data)
+            res.render('list', { output: data })
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
 })
 
 module.exports = router
