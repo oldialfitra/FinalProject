@@ -46,7 +46,8 @@ router.post('/:id/upload', (req, res) => {
                     name: req.file.filename,
                     path: req.file.path,
                     createdAt: new Date(),
-                    updatedAt: new Date()
+                    updatedAt: new Date(),
+                    extension: req.file.filename.split('.')[1]
                 })
                 .then(function(data) {
                     sharefile.create({
@@ -68,10 +69,6 @@ router.post('/:id/upload', (req, res) => {
 
 // })
 
-router.get('/index', (req, res) => {
-    res.render('index')
-})
-
 router.get('/register', (req, res) => {
     res.render('home')
 })
@@ -86,11 +83,64 @@ router.post('/register', (req, res) => {
             email: req.body.email
         })
         .then(function(data) {
-            res.redirect('index')
+            res.redirect('login')
         })
         .catch(function(err) {
             res.send(err)
         })
+})
+
+router.get('/:id/update', (req, res) => {
+    file.findByPk(req.params.id)
+        .then(function(data) {
+            // res.send(data)
+            res.render('update', { output: data, filename: data.name.split('.')[0] })
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
+})
+
+router.post('/:id/update', (req, res) => {
+    file.findByPk(req.params.id)
+        .then(function(data) {
+            file.update({
+                name: req.body.name + data.extension
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+        })
+
+    .then(function() {
+            res.send('update berhasil')
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
+})
+
+router.get('/:id/delete', (req, res) => {
+    sharefile.destroy({
+            where: {
+                FileId: req.params.id
+            }
+        })
+        .then(function(data) {
+            file.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+        })
+        .then(function(data) {
+            res.send('Destroy berhasil')
+        })
+})
+
+router.get('/:id/download', (req, res) => {
+
 })
 
 module.exports = router

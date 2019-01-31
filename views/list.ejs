@@ -35,8 +35,8 @@
 
 <body style="text-align:center;">
 <p> List File </p>
-<form action="/user/<%=output.id%>">
-    <input type="submit" value="Register Teacher" />
+<form action="/user/<%=output.id%>/upload">
+    <input type="submit" value="Upload File" />
 </form>
     <table>
         <tr>
@@ -57,7 +57,7 @@
                 <%= e.File.path %>
             </td>
             <td>
-                <a href="/teacher/edit/<%=e.id%>">Edit</a><br><br><a href="/teacher/delete/<%=e.id%>">Delete</a>
+            <a href="/user/<%=e.File.id%>/update/">Update</a><br><br><a href="/user/<%=e.File.id%>/delete/">Delete</a>
             </td>
 
         </tr>

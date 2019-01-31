@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.associate = function(models) {
         // associations can be defined here
-        User.hasMany(models.ShareFile)
+        User.belongsToMany(models.File, { through: 'ShareFile', foreignKey: 'UserId', otherKey: 'FileId' })
     };
     return User;
 };
