@@ -24,14 +24,14 @@ router.post('/login', (req, res) => {
                 res.send('Wrong username')
             } else {
                 if (encrypt(req.body.password, data.password)) {
-                    req.session.user = { id: data.id }
+                    req.session.user = { id: data.id, username: data.username }
+                        // res.send(req.session)
                     res.redirect('/user/list')
                         // req.session.user
                 } else {
                     throw 'wrong password'
                 }
             }
-            // }
         })
         .catch(function(err) {
             res.send(err)
@@ -44,25 +44,47 @@ router.get('/getSession', (req, res) => {
 
 router.get('/logout', (req, res) => {
     req.session.destroy()
-    res.send('logout')
+    res.redirect('/')
 })
 
 router.get('/list', (req, res) => {
-    sharefile.findAll({
-            where: {
-                UserId: req.session.user.id
-            },
-            include: {
-                model: file
-            }
-        })
-        .then(function(data) {
-            // res.send(data)
-            res.render('list', { output: data })
-        })
+    let array = []
+    for (const key in req.session) {
+        array.push(key)
+    }
+    if (array.length >= 2) {
+        user.findAll({
+                where: {
+                    id: req.session.user.id
+                },
+                include: {
+                    model: file
+                }
+            })
+            // sharefile.findAll({
+            //         where: {
+            //             UserId: req.session.user.id
+            //         },
+            //         include: {
+            //             model: file
+            //                 // ,
+            //                 // include: {
+            //                 //     model: user
+            //                 // }
+            //         }
+            //     })
+            .then(function(data) {
+                // res.send(data)
+                // res.send(data[0].File.Users[0])
+                res.render('myshare', { output: data })
+            })
+
         .catch(function(err) {
             res.send(err)
         })
+    } else {
+        res.redirect('login')
+    }
 })
 
 router.get('/upload', (req, res) => {
@@ -102,7 +124,7 @@ router.post('/upload', (req, res) => {
                 })
             console.log(req.file)
                 // res.send('test')
-            res.render('list')
+            res.redirect('/user/list')
         }
     })
 })
@@ -112,7 +134,7 @@ router.post('/upload', (req, res) => {
 // })
 
 router.get('/register', (req, res) => {
-    res.render('home')
+    res.render('register')
 })
 
 router.post('/register', (req, res) => {
@@ -147,7 +169,7 @@ router.post('/:id/update', (req, res) => {
     file.findByPk(req.params.id)
         .then(function(data) {
             file.update({
-                name: req.body.name + data.extension
+                name: req.body.name + '.' + data.extension
             }, {
                 where: {
                     id: req.params.id
@@ -156,7 +178,7 @@ router.post('/:id/update', (req, res) => {
         })
 
     .then(function() {
-            res.redirect('/list')
+            res.redirect('/user/list')
         })
         .catch(function(err) {
             res.send(err)
@@ -177,7 +199,7 @@ router.get('/:id/delete', (req, res) => {
             })
         })
         .then(function(data) {
-            res.redirect('/list')
+            res.redirect('/user/list')
         })
         .catch(function(err) {
             res.send(err)
@@ -191,43 +213,72 @@ router.get('/:id/download', (req, res) => {
         })
 })
 
-router.get('/:username/search', (req, res) => {
+router.get('/:user/search', (req, res) => {
     user.findOne({
             where: {
-                username: req.params.username
+                username: req.params.user
             }
         })
         .then(function(data) {
-            res.render(data)
+            res.render('download', { output: data })
         })
         .catch(function(err) {
             res.send(err)
         })
 })
 
-router.get('/:username/list', (req, res) => {
-    user.findOne({
-            where: {
-                username: req.params.username
-            }
-        })
-        .then(function(data) {
-            sharefile.findAll({
-                where: {
-                    UserId: data.id
-                },
-                include: {
-                    model: file
-                }
-            })
-        })
-        .then(function(data) {
-            // res.send(data)
-            res.render('list', { output: data })
-        })
-        .catch(function(err) {
-            res.send(err)
-        })
+router.post('/:user/search', (req, res) => {
+    res.render('download')
 })
+
+// router.get('/:user/search', (req, res) => {
+//     user.findOne({
+//             where: {
+//                 username: req.params.user
+//             }
+//         })
+//         .then(function(data) {
+//             // res.render(data)
+//             return sharefile.findAll({
+//                 where: {
+//                     UserId: data.id
+//                 },
+//                 include: {
+//                     model: file
+//                 }
+//             })
+//         })
+//         .then(function(data) {
+//             res.render('download', { output: data })
+//         })
+//         .catch(function(err) {
+//             res.send(err)
+//         })
+// })
+
+// router.get('/:user/list', (req, res) => {
+//     user.findOne({
+//             where: {
+//                 username: req.params.user
+//             }
+//         })
+//         .then(function(data) {
+//             sharefile.findAll({
+//                 where: {
+//                     UserId: data.id
+//                 },
+//                 include: {
+//                     model: file
+//                 }
+//             })
+//         })
+//         .then(function(data) {
+//             // res.send(data)
+//             res.render('list', { output: data })
+//         })
+//         .catch(function(err) {
+//             res.send(err)
+//         })
+// })
 
 module.exports = router
