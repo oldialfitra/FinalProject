@@ -1,19 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <title>File Uploads</title>
-</head>
-<body>
+<html>
 
-    <h1>File Upload</h1>
-    <%= typeof msg != 'undefined' ? msg : '' %>
-    <form action="/user/upload" method="POST" enctype="multipart/form-data">
-          <input name="myFile" type="file">
-      <button type="submit" class="btn">Submit</button>
-    </form>
+<head>
+    <title>shareMe | it's good to share</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Vast+Shadow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <img src="img/icon-left-font-monochrome-white.png" />
+            <ul>
+                <li><a href="#contact">Log-In</a></li>
+                <li><a href="#menu">MyShare</a></li>
+                <li><a href="#home">Home</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="home">
+        <img src="img/american-casual-cellphone-1484566.jpg" />
+        <img src="img/icon-home.png" class="bur">
+                <p class="caption">Sharing Has Never Been So Easy</p>
+    </section>
+
+    <section id="info">
+        <div class="info-bq">
+            <p class="info-bq1">Why shareMe?</p>
+            <p class="info-bq2">
+                <b>Access it anywhere</b>
+                <br><br>
+                Share any file and let others open it in the classroom, library, coffee shop, home, airport, hotel, or conference center.<br><br><br>
+                <b>It’s good to share</b>
+                <br><br>
+                Set up a folder that is accessible by a specific set of shareMe accounts. Try this with students, colleagues, committee members, co-authors, family, or other groups.
+                <br><br> <br>
+                <b>The app is optional</b>
+                <br><br>
+                If the computer in your classroom that doesn’t have shareMe installed, simply access your files from a browser.
+            </p>
+        </div>
+    </section>
+
 </body>
+
 </html>

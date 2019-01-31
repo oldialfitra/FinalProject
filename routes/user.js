@@ -13,7 +13,6 @@ router.get('/upload', (req, res) => {
         .catch(function(err) {
             res.send(err)
         })
-
 })
 
 router.post('/upload', (req, res) => {
@@ -38,7 +37,7 @@ router.post('/upload', (req, res) => {
                         updatedAt: new Date()
                     })
                 })
-            console.log(req.file)
+            // console.log(req.file)
             res.send('test')
         }
     })
