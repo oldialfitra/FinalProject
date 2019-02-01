@@ -3,23 +3,48 @@ const multer = require('multer')
 const ejs = require('ejs')
 const path = require('path')
 const userRouter = require('./routes/user')
-    //init app
+var session = require('express-session')
+
+//init app
 let app = express()
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 let port = 3000
 
 //EJS
+app.set('trust proxy', 1) // trust first proxy
+var sess = {
+    secret: 'keyboard cat'
+}
+app.use(session(sess))
 app.set('view engine', 'ejs')
 
 //public folder
 app.use(express.static('./public'))
 
 app.get("/", (req, res) => {
-    res.send("Tugas Weekend Express Sequelize Crud.")
+    res.render('homemyshare')
+})
+app.use('/user', userRouter)
+
+app.get('/getSession', (req, res) => {
+    res.send(req.session)
 })
 
-app.use('/user', userRouter)
+app.get('/setSession', (req, res) => {
+    req.session.user = { name: 'oldi', id: 1 }
+    res.send('create session')
+})
+
+app.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.send('logout')
+})
+
+
+
+
+
 
 
 // app.post('/userRouter', upload.single('avatar'), function(req, res, next) {

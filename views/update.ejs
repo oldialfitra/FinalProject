@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        html,body {
+            margin: 0 auto;
+            padding: 0 auto;
+        }
+        
+        form {
+            margin: auto;
+            border: 1px solid;
+            background-color: whitesmoke;
+            color: black;
+            font-weight: bold;
+            width: 70%;
+        }
+        p {
+            font-family: Roboto;
+            font-size: 40px;
+            font-weight: bold;
+            color: black;
+        }
+
+        #save {
+            border: 2px solid black;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body style="text-align:center;">
+    <form action="" method="POST">
+        <p> Update File</p>
+        <label for="name"> Name </label> <br>
+        <input id = "name" type="text" name="name" value='<%=output.name.split(".")[0]%>'><br>
+        <button id= "save" type="submit">Masukkan</button>
+    </form>
+</body>
+
+</html>

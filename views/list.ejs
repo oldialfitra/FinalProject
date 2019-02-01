@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+            margin: auto;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        p {
+            font-family: Roboto;
+            font-size: 40px;
+            font-weight: bold;
+            color: Black;
+        }
+    </style>
+</head>
+
+<body style="text-align:center;">
+<p> List File </p>
+
+<form action="/user/upload">
+    <input type="submit" value="Upload File" />
+</form>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>path</th>
+            <th>Option</th>
+        </tr>
+        <% output.forEach(e=>{ %>
+        <tr>
+            <td>
+                <%= e.File.id %>
+            </td>
+            <td>
+                <%= e.File.name %>
+            </td>
+            <td>
+                <%= e.File.path %>
+            </td>
+            <td>
+            <a href="/user/<%=e.File.id%>/update/">Update</a><br><br><a href="/user/<%=e.File.id%>/delete/">Delete</a><br><br><a href="/user/<%=e.File.id%>/download/">Download</a>
+            </td>
+
+        </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>
